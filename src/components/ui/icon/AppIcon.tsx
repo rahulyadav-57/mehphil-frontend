@@ -7,7 +7,9 @@ import {
   Branding,
   Bug,
   Calendar,
+  CalendarDefault,
   Chat,
+  Clock,
   Dashboard,
   Database,
   Discord,
@@ -18,6 +20,7 @@ import {
   Google,
   Lock,
   Logout,
+  MapMarker,
   NotepadEdit,
   Plus,
   Sliders,
@@ -54,7 +57,10 @@ export type AppIconType =
   | 'Doc'
   | 'VideoPlayer'
   | 'NotepadEdit'
-  | 'Logout';
+  | 'Logout'
+  | 'CalendarDefault'
+  | 'Clock'
+  | 'MapMarker';
 
 export interface AppIconInterface {
   name: AppIconType;
@@ -88,6 +94,9 @@ const Components = {
   VideoPlayer,
   NotepadEdit,
   Logout,
+  CalendarDefault,
+  Clock,
+  MapMarker,
 };
 const AppIcon: FC<AppIconInterface> = ({ name, className = '' }) => {
   if (typeof Components[name] !== undefined) {
