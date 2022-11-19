@@ -1,0 +1,63 @@
+@import "/styles/variables.scss";
+
+.container {
+  display: flex;
+  .column {
+    &Left {
+      max-width: 70%;
+      flex: 0 0 70%;
+    }
+    &Right {
+      max-width: 30%;
+      flex: 0 0 30%;
+      margin-left: 1.5rem;
+      .row {
+        .icon {
+          opacity: 0.5;
+        }
+      }
+      .addToCalendar {
+        display: flex;
+        justify-content: center;
+      }
+      .bookingForm {
+        margin-top: 2rem;
+        display: flex;
+        .bookNow {
+          margin-left: 1rem;
+        }
+      }
+      .ticketCountWrapper {
+        display: flex;
+        align-items: center;
+        user-select: none;
+        .circle {
+          width: 2rem;
+          height: 2rem;
+          background: rgba(3, 3, 3, 0.4);
+          border-radius: 50%;
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+        }
+        input {
+          background-color: transparent !important;
+          box-shadow: none !important;
+          border: 0 !important;
+          text-align: center;
+          width: 2rem;
+          padding: 0;
+        }
+      }
+    }
+  }
+  .hero {
+    background-color: var(--bg-color-light);
+    border-radius: $border-radius;
+    overflow: hidden;
+    .intro {
+      padding: 1.5rem;
+    }
+  }
+}

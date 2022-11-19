@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { FC } from 'react';
 import s from './EventCard.module.scss';
 
@@ -6,7 +7,7 @@ interface Props {}
 
 const EventCard: FC = () => {
   return (
-    <div className={s.container}>
+    <Link className={s.container} href="/event-details">
       <span className={`${s.eventDate} text-xs`}>31st Oct</span>
       <Image
         src="/images/layout/event-default.jpg"
@@ -18,7 +19,7 @@ const EventCard: FC = () => {
       <div className={s.info}>
         <span className={`w-500`}>Near Protocol Mumbai Meetup</span>
       </div>
-    </div>
+    </Link>
   );
 };
 
