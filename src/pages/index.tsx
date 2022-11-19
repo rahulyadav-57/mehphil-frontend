@@ -8,7 +8,9 @@ export default function Home() {
       <Head>
         <title>{AppConstant.appDetails.appName}</title>
       </Head>
-      <Layout></Layout>
+      <Layout>
+        <></>
+      </Layout>
     </>
   );
 }
