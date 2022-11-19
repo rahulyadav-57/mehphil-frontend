@@ -1,3 +1,6 @@
+.btn-default {
+}
+
 .ant-form {
   &-item {
     label {
@@ -102,6 +105,10 @@
 .ant-btn {
   height: $form-element-height;
   border-radius: var(--border-radius);
+  align-items: center;
+  display: inline-flex;
+  padding-top: 0;
+  padding-bottom: 0;
   //   transition: background 0.3s ease;
 
   &-medium {
@@ -154,15 +161,10 @@
   &-primary {
     background: var(--btn-primary-bg);
     border: 0;
+
     &:hover,
     &:focus {
-      background: linear-gradient(
-        180deg,
-        #0085ff -4.5%,
-        #13a5fd 18.08%,
-        #22bdfb 53.94%,
-        #29c8fa 100.1%
-      );
+      background-color: var(--primary-dark);
     }
     &:disabled {
       &,
@@ -194,5 +196,9 @@
         display: none;
       }
     }
+  }
+  &-bordered {
+    background-color: transparent;
+    border: 1px solid var(--btn-primary-bg);
   }
 }

@@ -10,7 +10,7 @@ interface Props {
 }
 
 const AppLogo: FC<Props> = ({
-  type = 'horiozontal',
+  type = 'vertical',
   src = '/images/logo.svg',
   className = '',
 }) => {
@@ -23,7 +23,7 @@ const AppLogo: FC<Props> = ({
       <Image
         className={s.brandImage}
         src={imageSource}
-        width={type === 'horiozontal' ? 166 : 98}
+        width={type === 'horiozontal' ? 166 : 50}
         height={50}
         alt=""
       />

@@ -1,0 +1,11 @@
+.container {
+  padding: 1rem 0;
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .connectWallet {
+      margin-left: 1rem;
+    }
+  }
+}

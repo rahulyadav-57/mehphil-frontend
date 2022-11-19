@@ -1,5 +1,6 @@
 :root {
-  --primary: #13a3fd;
+  --primary: #295ede;
+  --primary-dark: #1351e2;
   --font-title: "Montserrat", sans-serif;
   --font-body: "Sora", sans-serif;
   --text-color: #f7f7f7;
@@ -8,11 +9,11 @@
   --color-danger: #b43030;
   --separator-line: rgba(141, 141, 141, 0.2);
   --form-input-bg: #161616;
-  --bg-color-dark: #1e1e1e;
+  --bg-color-dark: #0c1021;
   --bg-color-light: #262626;
   --border-radius: 10px;
   --btn-disabled: #4e4e4e;
-  --btn-primary-bg: linear-gradient(180deg, #0085ff -4.5%, #29c8fa 100.1%);
+  --btn-primary-bg: var(--primary);
 }
 
 html {
@@ -146,5 +147,54 @@ picture {
   }
   &-2 {
     box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// Section container
+
+.container,
+.container-fluid,
+.container-sm,
+.container-md,
+.container-lg,
+.container-xl {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .container,
+  .container-sm {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container,
+  .container-sm,
+  .container-md {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl {
+    max-width: 1140px;
   }
 }
