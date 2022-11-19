@@ -1,0 +1,101 @@
+.heading {
+  font-family: var(--font-title);
+  &.h1 {
+    font-size: 2.5rem;
+  }
+  &.h2 {
+    font-size: 2.25rem;
+  }
+  &.h3 {
+    font-size: 2rem;
+  }
+  &.h4 {
+    font-size: 1.5rem;
+  }
+  &.h5 {
+    font-size: 1.375rem;
+  }
+  &.h6 {
+    font-size: 1.25rem;
+  }
+}
+
+#__next {
+  .text {
+    &-l {
+      font-size: 1.25rem;
+    }
+    &-m {
+      font-size: 1.125rem;
+    }
+    &-s {
+      font-size: 0.875rem;
+    }
+    &-xs {
+      font-size: 0.75rem;
+    }
+    &-center {
+      text-align: center;
+    }
+  }
+}
+.w {
+  &-400 {
+    font-weight: 400;
+  }
+  &-500 {
+    font-weight: 500;
+  }
+  &-600 {
+    font-weight: 600;
+  }
+  &-700 {
+    font-weight: 700;
+  }
+  &-900 {
+    font-weight: 900;
+  }
+}
+.m {
+  &t-5 {
+    margin-top: 0.3125rem;
+  }
+  &t-10 {
+    margin-top: 0.625rem;
+  }
+  &t-20 {
+    margin-top: 1.25rem;
+  }
+  &-h-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+.p {
+  &v {
+    &-5 {
+      padding: 5px 0;
+    }
+    &-10 {
+      padding: 10px 0;
+    }
+  }
+  &b {
+    &-5 {
+      padding-bottom: 5px;
+    }
+    &-5 {
+      padding-bottom: 10px;
+    }
+  }
+}
+
+.color {
+  &-light {
+    color: var(--text-color-light);
+  }
+}
+
+.justify-center {
+  justify-content: center;
+}

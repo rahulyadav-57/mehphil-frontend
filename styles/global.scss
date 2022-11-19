@@ -1,0 +1,150 @@
+:root {
+  --primary: #13a3fd;
+  --font-title: "Montserrat", sans-serif;
+  --font-body: "Sora", sans-serif;
+  --text-color: #f7f7f7;
+  --text-color-light: #8d8d8d;
+  --text-color-dark: #808080;
+  --color-danger: #b43030;
+  --separator-line: rgba(141, 141, 141, 0.2);
+  --form-input-bg: #161616;
+  --bg-color-dark: #1e1e1e;
+  --bg-color-light: #262626;
+  --border-radius: 10px;
+  --btn-disabled: #4e4e4e;
+  --btn-primary-bg: linear-gradient(180deg, #0085ff -4.5%, #29c8fa 100.1%);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  padding: 0;
+  font-family: var(--font-body);
+  letter-spacing: 0.02em;
+  color: var(--text-color);
+  background: var(--bg-color-dark);
+  line-height: 1.3;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--primary);
+  }
+}
+
+/* Box Sizing */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Reset margins */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+picture {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  color: var(--text-color);
+}
+
+/* make images responsive */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* utility classes */
+.flex {
+  display: flex;
+  gap: var(--gap, 1rem);
+}
+.d-block {
+  display: block;
+}
+
+.grid {
+  display: grid;
+  gap: var(--gap, 1rem);
+}
+
+.container {
+  max-width: 80rem;
+}
+
+.height-min-100 {
+  min-height: 100vh;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.app-icon {
+  color: var(--text-color);
+  &:hover,
+  &:visited {
+    color: var(--primary);
+  }
+}
+.page-login {
+  .login-state {
+    display: none;
+    .page-loaded & {
+      display: block;
+    }
+  }
+  .section-loader {
+    .page-loaded & {
+      display: none;
+    }
+  }
+}
+
+.cursor {
+  &-p {
+    cursor: pointer;
+  }
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+.separator-line {
+  display: block;
+  height: 1px;
+  background-color: var(--separator-line);
+}
+
+.card-shadow {
+  &-default {
+    box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.25);
+  }
+  &-2 {
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.15);
+  }
+}
