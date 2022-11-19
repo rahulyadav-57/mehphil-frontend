@@ -1,8 +1,8 @@
 :root {
   --primary: #295ede;
   --primary-dark: #1351e2;
-  --font-title: "Montserrat", sans-serif;
-  --font-body: "Sora", sans-serif;
+  --font-title: "Poppins", sans-serif;
+  --font-body: "Poppins", sans-serif;
   --text-color: #f7f7f7;
   --text-color-light: #8d8d8d;
   --text-color-dark: #808080;
@@ -28,6 +28,8 @@ body {
   background: var(--bg-color-dark);
   line-height: 1.3;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {

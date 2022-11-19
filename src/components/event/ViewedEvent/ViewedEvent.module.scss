@@ -1,0 +1,10 @@
+.container {
+  .heading {
+  }
+  .list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 50px 30px;
+    margin-top: 1.5rem;
+  }
+}

@@ -12,7 +12,7 @@ const Layout: FC<Props> = ({ children, className }) => {
     <div className={`${s.container} ${className} height-min-100`}>
       <Header />
 
-      <div className={`${s.column} ${s.column_right}`}>{children}</div>
+      <main className={s.main}>{children}</main>
     </div>
   );
 };
