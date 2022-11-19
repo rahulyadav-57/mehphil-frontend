@@ -26,7 +26,6 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=poppins:wght@400;600;700;900&family=Sora:wght@400;600;700&display=swap"
             rel="stylesheet"
           />
-          <script type="text/javascript" src="/js/signer.js" />
         </Head>
         <body>
           <Main />
