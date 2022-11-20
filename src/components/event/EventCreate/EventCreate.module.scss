@@ -1,0 +1,69 @@
+@import "/styles/variables.scss";
+
+.container {
+  display: flex;
+  .column {
+    &Left {
+      max-width: 70%;
+      flex: 0 0 70%;
+    }
+    &Right {
+      max-width: 30%;
+      flex: 0 0 30%;
+      margin-left: 1.5rem;
+      .row {
+        .icon {
+          opacity: 0.5;
+        }
+      }
+      .value {
+        font-size: 1rem;
+        display: block;
+        margin-top: 5px;
+        font-weight: 500;
+      }
+    }
+  }
+  .eventDetails {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 20px;
+
+    .eventType {
+      color: red;
+      [class^="ant-radio-group"] {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      [class*="ant-radio-button-wrapper"] {
+        padding: 3rem 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: none;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--color-light-gray) !important;
+        color: var(--color-light-gray);
+        &[class*="ant-radio-button-wrapper-checked"] {
+          background-color: rgba($primary, 0.2);
+          border-color: var(--primary) !important;
+          color: var(--primary);
+        }
+        &::before {
+          display: none;
+        }
+      }
+    }
+    .mapCoordinate {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+  }
+  .thumbnail {
+    border-radius: var(--border-radius);
+  }
+}
