@@ -3,7 +3,7 @@ import { Layout } from '@/components/common';
 import { AppConstant } from '@/constant';
 import Head from 'next/head';
 
-export default function EventDetailsPage() {
+export default function CheckoutPage() {
   return (
     <>
       <Head>
