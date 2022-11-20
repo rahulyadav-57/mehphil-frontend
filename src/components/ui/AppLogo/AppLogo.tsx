@@ -11,12 +11,12 @@ interface Props {
 
 const AppLogo: FC<Props> = ({
   type = 'vertical',
-  src = '/images/logo.svg',
+  src = '/images/logo.png',
   className = '',
 }) => {
   let imageSource = src;
   if (type === 'vertical') {
-    imageSource = '/images/logo.svg';
+    imageSource = '/images/logo.png';
   }
   return (
     <Link href="/" className={`${s.container} ${className} ${s[type]}`}>
