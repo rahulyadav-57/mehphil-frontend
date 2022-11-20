@@ -32,9 +32,17 @@
   border-radius: var(--border-radius);
   font-weight: 400;
   box-shadow: none;
+
+  .ant-picker-input {
+    height: 100%;
+  }
+
   &::placeholder {
     color: #6e7580;
   }
+}
+textarea.ant-input {
+  padding-top: 0.7rem !important;
 }
 
 .ant-input:focus,
@@ -148,6 +156,9 @@
   justify-content: center;
   padding-top: 0;
   padding-bottom: 0;
+  &.ant-btn-sm {
+    height: unset;
+  }
   //   transition: background 0.3s ease;
 
   &-medium {
