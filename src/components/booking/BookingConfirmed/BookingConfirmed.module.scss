@@ -1,0 +1,33 @@
+.container {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  .checkMark {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  .separator {
+    margin: 1rem 0 1rem;
+  }
+  .list {
+    .item {
+      display: flex;
+      justify-content: space-between;
+      margin: 0.2rem 0;
+      padding: 1rem 0.5rem;
+      border-radius: var(--border-radius);
+      transition: background-color 0.1s ease-in;
+      &:hover {
+        background-color: var(--color-light-gray);
+      }
+      .label {
+        color: var(--text-color-light);
+      }
+    }
+  }
+  .action {
+    width: 15rem;
+    margin-top: 2rem;
+  }
+}
