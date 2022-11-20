@@ -1,0 +1,50 @@
+@import "/styles/variables.scss";
+
+.container {
+  display: flex;
+  .column {
+    &Left {
+      max-width: 70%;
+      flex: 0 0 70%;
+    }
+    &Right {
+      max-width: 30%;
+      flex: 0 0 30%;
+      margin-left: 1.5rem;
+      .row {
+        .icon {
+          opacity: 0.5;
+        }
+      }
+      .value {
+        font-size: 1rem;
+        display: block;
+        margin-top: 5px;
+        font-weight: 500;
+      }
+    }
+  }
+  .formGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 20px;
+    margin-top: 2rem;
+  }
+  .separator {
+    margin: 1rem -1.5rem;
+  }
+  .priceWrapper {
+    .items {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5px;
+      &:nth-of-type(1) {
+        margin-top: 1rem;
+      }
+      &:last-child {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+    }
+  }
+}

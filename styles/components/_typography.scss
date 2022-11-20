@@ -72,6 +72,12 @@
   &t-30 {
     margin-top: 1.875rem;
   }
+  &t-35 {
+    margin-top: 2.1875rem;
+  }
+  &t-40 {
+    margin-top: 2.5rem;
+  }
   &t-50 {
     margin-top: 3.125rem;
   }
@@ -110,4 +116,8 @@
 
 .justify-center {
   justify-content: center;
+}
+
+.line-height-s {
+  line-height: 1.2;
 }
