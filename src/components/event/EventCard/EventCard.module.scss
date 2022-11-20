@@ -2,6 +2,7 @@
 .container {
   position: relative;
   color: #fff !important;
+  display: block;
   .thumbnail {
     border-radius: $border-radius;
   }
@@ -20,6 +21,7 @@
     align-items: center;
     text-align: center;
     border-radius: 50%;
+    word-spacing: 20px;
   }
   .info {
     margin-top: 0.8rem;

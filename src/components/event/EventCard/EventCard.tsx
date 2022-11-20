@@ -1,14 +1,30 @@
+import moment from 'moment';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
 import s from './EventCard.module.scss';
 
-interface Props {}
+interface EventInteraface {
+  name: string;
+  date: Date;
+}
+interface Props {
+  data?: EventInteraface;
+  className?: string;
+}
 
-const EventCard: FC = () => {
+const EventCard: FC<Props> = ({ data, className }) => {
+  if (!data) {
+    data = {
+      name: 'Near Protocol Mumbai Meetup',
+      date: new Date(),
+    };
+  }
   return (
-    <Link className={s.container} href="/event-details">
-      <span className={`${s.eventDate} text-xs`}>31st Oct</span>
+    <Link className={`${s.container} ${className}`} href="/event-details">
+      <span className={`${s.eventDate} text-xs`}>
+        {moment(data.date).format('Do MMM')}
+      </span>
       <Image
         src="/images/layout/event-default.jpg"
         width={500}
@@ -17,7 +33,7 @@ const EventCard: FC = () => {
         className={s.thumbnail}
       />
       <div className={s.info}>
-        <span className={`w-500`}>Near Protocol Mumbai Meetup</span>
+        <span className={`w-500`}>{data.name}</span>
       </div>
     </Link>
   );
