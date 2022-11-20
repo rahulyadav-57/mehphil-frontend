@@ -101,7 +101,7 @@ const Checkout: FC = () => {
 
               <div className={s.formGrid}>
                 <Form.Item
-                  name={[0, 'member']}
+                  name={['member', 0]}
                   label="Member 1"
                   className="m-0"
                   rules={[
@@ -113,7 +113,7 @@ const Checkout: FC = () => {
                   <Input placeholder="Enter  name" />
                 </Form.Item>
                 <Form.Item
-                  name={[1, 'member']}
+                  name={['member', 1]}
                   label="Member 2"
                   className="m-0"
                   rules={[
