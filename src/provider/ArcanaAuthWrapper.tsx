@@ -52,12 +52,21 @@ const ArcanaAuthWrapper: FC<Props> = ({ children }) => {
         await AuthService.changeChain();
         await timeout(300);
         await signMessage();
-      } catch (error) {
-        notification.error({
-          message:
-            'Current login flow is supported in chromium based browser only',
-        });
-        console.log('abc', error);
+      } catch (error: any) {
+        if (
+          error
+            .toString()
+            .include(
+              'The requested fn sendRequest is not available in this context'
+            )
+        ) {
+          notification.error({
+            message:
+              'Current login flow is supported in chromium based browser only',
+          });
+        }
+
+        console.log('abc', error, typeof error);
       }
     })();
 
