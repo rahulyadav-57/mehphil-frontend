@@ -1,3 +1,5 @@
+import UploadFile from '@/components/ui/form/UploadFile';
+import { AppConfig } from '@/config';
 import { useEventActions } from '@/hooks';
 import { Button, DatePicker, Form, Input, notification, Radio } from 'antd';
 import moment from 'moment';
@@ -10,9 +12,11 @@ const EventCreate: FC = () => {
   const [form] = Form.useForm();
   const eventActions = useEventActions();
   const [isLoading, setIsLoading] = useState(false);
+  const [thumbnailURL, setThumnailURL] = useState('');
 
   const onFinish = async (formValues: any) => {
     setIsLoading(true);
+    console.log(formValues);
 
     try {
       const formData = {
@@ -26,11 +30,20 @@ const EventCreate: FC = () => {
           long: formValues.long,
         },
         meetingUrl: formValues.meetingUrl,
+        thumbnail: formValues.thumbnail ? formValues.thumbnail[0].fileData._id : '',
       };
       await eventActions.create(formData);
-      notification.success({message: 'Event created'});
-    } catch (error) {
-      notification.error({message: 'Something went wrong'});
+      notification.success({ message: 'Event created' });
+    } catch (error: any) {
+      if (
+        error?.response?.status === 422 &&
+        Array.isArray(error.response.data.errors)
+      ) {
+        form.setFields(error.response.data.errors);
+        notification.error({ message: 'Form validation failed' });
+        return;
+      }
+      notification.error({ message: 'Something went wrong' });
     } finally {
       setIsLoading(false);
     }
@@ -59,13 +72,50 @@ const EventCreate: FC = () => {
               <span className="heading h6 w-500">Event Details</span>
               <div className={s.eventDetails}>
                 <div>
-                  <Image
-                    src="/images/layout/event-default.jpg"
-                    width={500}
-                    height={240}
-                    alt=""
-                    className={`${s.thumbnail} image-cover`}
-                  />
+                  <div
+                    className={`${s.uploadThumbContainer} ${
+                      thumbnailURL ? s.hasThumbnail : ''
+                    }`}
+                  >
+                    {thumbnailURL && (
+                      <Image
+                        src={thumbnailURL}
+                        width={500}
+                        height={240}
+                        alt=""
+                        className={`${s.thumbnail} image-cover`}
+                      />
+                    )}
+                    <Form.Item
+                      name="thumbnail"
+                      className="form-item"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}
+                    >
+                      <UploadFile
+                        className={s.thumbnailUpload}
+                        maxUploadAllowed={1}
+                        type="large"
+                        label="Upload logo"
+                        onChange={(value) => {
+                          if (value && value.length > 0) {
+                            setThumnailURL(
+                              `${AppConfig.API_URL}/${value[0].fileData.path}`
+                            );
+                            return;
+                          }
+                          setThumnailURL('');
+                          console.log(
+                            value && value.length > 0 && value[0].fileData.path
+                          );
+                        }}
+                      />
+                    </Form.Item>
+                  </div>
+
                   <Form.Item
                     name="date"
                     label="Date"
@@ -197,8 +247,8 @@ const EventCreate: FC = () => {
                     <EventCard
                       className="mt-10"
                       data={{
-                        name: form.getFieldValue('name'),
-                        date: form.getFieldValue('date'),
+                        title: form.getFieldValue('name'),
+                        eventAt: form.getFieldValue('date'),
                       }}
                     />
                     {/* <span>{form.getFieldValue('name')}</span> */}

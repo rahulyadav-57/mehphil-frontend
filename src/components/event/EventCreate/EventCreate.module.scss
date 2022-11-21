@@ -66,4 +66,29 @@
   .thumbnail {
     border-radius: var(--border-radius);
   }
+  .thumbnailUpload {
+    [class="ant-upload"] > div {
+      padding: 4rem 0 !important;
+    }
+  }
+  .uploadThumbContainer {
+    position: relative;
+    &.hasThumbnail {
+      > div {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        margin-bottom: -8px;
+        border: 0;
+      }
+      div[class*="ant-upload-list-item"] {
+        border: 0 !important;
+        background: rgba(0, 0, 0, 0.4) !important;
+        * {
+          color: #fff !important;
+        }
+      }
+    }
+  }
 }

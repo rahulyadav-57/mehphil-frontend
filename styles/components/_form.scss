@@ -292,3 +292,71 @@ textarea.ant-input {
     }
   }
 }
+
+.ant-file-upload-default {
+  .ant-upload-list-item-progress {
+    left: 0;
+  }
+  &.large {
+    .ant-upload-select {
+      text-align: center;
+      justify-content: center;
+      display: flex;
+      border: 0;
+      padding: 0;
+      border-radius: 10px;
+      border: 2px dashed rgba(255, 255, 255, 0.2);
+
+      .ant-upload {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        > div {
+          padding: 2rem 0;
+        }
+      }
+    }
+  }
+  .ant-upload-select {
+    border: 1px solid rgba(#fff, 0.2);
+    padding: 8px 25px 8px 10px;
+    position: relative;
+    min-height: 20px;
+    margin-top: 0.4rem;
+    border-radius: 8px;
+    width: 100%;
+  }
+  .ant-upload-text-icon .anticon {
+    color: #fff;
+  }
+  .ant-upload-list {
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+  .ant-upload-list-item:hover .ant-upload-list-item-info {
+    background-color: transparent;
+  }
+  .ant-upload-list-item-card-actions:hover .anticon,
+  .ant-upload-list-item-card-actions .anticon {
+    color: #fff;
+  }
+  .ant-upload-list-item-card-actions-btn {
+    opacity: 1;
+    background-image: url("/images/icon/cancel.svg");
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+    svg {
+      opacity: 0;
+    }
+  }
+  .ant-upload-list {
+    .ant-upload-list-item {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 30px 15px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+}

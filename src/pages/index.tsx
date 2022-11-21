@@ -1,5 +1,5 @@
 import { Layout } from '@/components/common';
-import { EventListing, ViewedEvent } from '@/components/event';
+import { EventListing } from '@/components/event';
 import { AppConstant } from '@/constant';
 import Head from 'next/head';
 
@@ -12,7 +12,7 @@ export default function Home() {
       <Layout>
         <div className="container">
           <EventListing />
-          <ViewedEvent className="mt-100" />
+          {/* <ViewedEvent className="mt-100" /> */}
         </div>
       </Layout>
     </>

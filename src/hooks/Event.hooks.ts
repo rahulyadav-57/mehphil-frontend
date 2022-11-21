@@ -8,9 +8,17 @@ function useEventActions() {
 
   return {
     create,
+    list,
+    show,
   };
 
   async function create(data: any): Promise<AxiosResponse> {
     return ApiClient.post("/meetup", data);
+  }
+  async function list(): Promise<AxiosResponse> {
+    return ApiClient.get("/meetup");
+  }
+  async function show(id: string): Promise<AxiosResponse> {
+    return ApiClient.get(`/meetup/${id}`);
   }
 }

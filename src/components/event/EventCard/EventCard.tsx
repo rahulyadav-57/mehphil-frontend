@@ -5,8 +5,8 @@ import { FC } from 'react';
 import s from './EventCard.module.scss';
 
 interface EventInteraface {
-  name: string;
-  date: Date;
+  title: string;
+  eventAt: Date;
 }
 interface Props {
   data?: EventInteraface;
@@ -16,14 +16,14 @@ interface Props {
 const EventCard: FC<Props> = ({ data, className }) => {
   if (!data) {
     data = {
-      name: 'Near Protocol Mumbai Meetup',
-      date: new Date(),
+      title: 'Near Protocol Mumbai Meetup',
+      eventAt: new Date(),
     };
   }
   return (
     <Link className={`${s.container} ${className}`} href="/event-details">
       <span className={`${s.eventDate} text-xs`}>
-        {moment(data.date).format('Do MMM')}
+        {moment(data.eventAt).format('Do MMM')}
       </span>
       <Image
         src="/images/layout/event-default.jpg"
@@ -33,7 +33,7 @@ const EventCard: FC<Props> = ({ data, className }) => {
         className={s.thumbnail}
       />
       <div className={s.info}>
-        <span className={`w-500`}>{data.name}</span>
+        <span className={`w-500`}>{data.title}</span>
       </div>
     </Link>
   );

@@ -1,0 +1,65 @@
+@import "/styles/variables.scss";
+
+.uploadPictureItem {
+  @media screen and (max-width: $mobileResolution) {
+    // min-height: 114px;
+    // padding: 1rem;
+    // padding-bottom: 3rem;
+  }
+  .browseFile {
+    background-color: rgba(255, 255, 255, 0.1);
+    // width: 110px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    display: inline-block;
+    color: #fff;
+    display: flex;
+    position: relative;
+    margin-top: 2rem;
+    &::before {
+      content: "or";
+      position: absolute;
+      top: -2rem;
+      left: 0;
+      right: 0;
+      opacity: 0.5;
+    }
+  }
+  &.large {
+    width: 100%;
+
+    // padding: 50px 15px;
+    font-size: 1rem;
+    .uploadImage {
+      border: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      .icon {
+        display: none;
+      }
+    }
+  }
+  .uploadImage {
+    // border: 1px solid #5d5d5d;
+    padding: 7px 10px;
+    color: #5d5d5d;
+    font-size: 0.9rem;
+    cursor: pointer;
+    align-items: center;
+    display: flex;
+    // font-weight: 500;
+    .icon {
+      width: 1rem;
+      height: 1rem;
+      margin-right: 0.5rem;
+    }
+  }
+  .placeholderLabel {
+    position: absolute;
+    left: 10px;
+    top: 6px;
+    font-weight: 500;
+    color: rgba(#fff, 0.5);
+  }
+}
