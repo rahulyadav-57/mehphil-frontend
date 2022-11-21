@@ -12,12 +12,6 @@ interface Props {
 }
 
 const EventCard: FC<Props> = ({ data, className }) => {
-  // if (!data) {
-  //   data = {
-  //     title: 'Near Protocol Mumbai Meetup',
-  //     eventAt: new Date(),
-  //   };
-  // }
   return (
     <Link className={`${s.container} ${className}`} href={`/event/${data._id}`}>
       <span className={`${s.eventDate} text-xs`}>
@@ -27,7 +21,7 @@ const EventCard: FC<Props> = ({ data, className }) => {
         src={
           !data.thumbnail
             ? '/images/layout/event-default.jpg'
-            : `${AppConfig.API_URL}/${data.thumbnail.path}`
+            : `${AppConfig.API_URL}/${(data.thumbnail as any).path}`
         }
         width={500}
         height={240}
