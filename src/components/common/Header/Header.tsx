@@ -1,6 +1,7 @@
 import { AppLogo } from '@/components/ui';
 import Link from 'next/link';
 import { FC } from 'react';
+import ConnectWallet from '../ConnectWallet';
 import s from './Header.module.scss';
 
 const Header: FC = () => {
@@ -16,11 +17,8 @@ const Header: FC = () => {
             >
               + Add Event
             </Link>
-            <div
-              className={`ant-btn  ant-btn-medium ant-btn-primary ${s.connectWallet}`}
-            >
-              Connect Wallet
-            </div>
+
+            <ConnectWallet className={s.connectWallet} />
           </div>
         </div>
       </div>

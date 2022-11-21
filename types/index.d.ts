@@ -1,3 +1,3 @@
 declare global {}
 
-export {};
+export type AppSocialLogin = "google" | "twitter" | "github";

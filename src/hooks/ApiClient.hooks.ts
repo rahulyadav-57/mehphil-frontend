@@ -19,9 +19,13 @@ function useApiClient() {
 
   function request(method: "GET" | "POST" | "PUT" | "DELETE") {
     return (url: string, data: any = null) => {
+      const finalURL =
+        !url.includes("https") || !url.includes("/api")
+          ? AppConfig.API_URL + url
+          : url;
       const apiData: any = {
         headers: {
-          ...authHeaders(url),
+          ...authHeaders(finalURL),
           "Content-Type": "application/json",
         },
       };
@@ -37,7 +41,7 @@ function useApiClient() {
 
       responseInterceptor(axiosInstance);
 
-      return axiosInstance({ method, url, ...apiData });
+      return axiosInstance({ method, url: finalURL, ...apiData });
     };
   }
 
