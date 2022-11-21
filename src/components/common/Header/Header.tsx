@@ -12,7 +12,7 @@ const Header: FC = () => {
           <AppLogo />
           <div>
             <Link
-              href="/"
+              href="/event/create"
               className="ant-btn ant-btn-medium ant-btn-bordered ant-btn-primary"
             >
               + Add Event

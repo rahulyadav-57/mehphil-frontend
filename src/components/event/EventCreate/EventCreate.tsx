@@ -1,15 +1,39 @@
-import { Button, DatePicker, Form, Input, Radio } from 'antd';
+import { useEventActions } from '@/hooks';
+import { Button, DatePicker, Form, Input, notification, Radio } from 'antd';
 import moment from 'moment';
 import Image from 'next/image';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import EventCard from '../EventCard';
 import s from './EventCreate.module.scss';
 
 const EventCreate: FC = () => {
   const [form] = Form.useForm();
+  const eventActions = useEventActions();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const onFinish = (formValues: any) => {
-    console.log(formValues, 'formValues');
+  const onFinish = async (formValues: any) => {
+    setIsLoading(true);
+
+    try {
+      const formData = {
+        title: formValues.name,
+        type: formValues.type,
+        eventAt: formValues.date,
+        description: formValues.description || '',
+        address: formValues.address || '',
+        latLong: {
+          lat: formValues.lat,
+          long: formValues.long,
+        },
+        meetingUrl: formValues.meetingUrl,
+      };
+      await eventActions.create(formData);
+      notification.success({message: 'Event created'});
+    } catch (error) {
+      notification.error({message: 'Something went wrong'});
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   function disabledDate(current: Date) {
@@ -90,7 +114,7 @@ const EventCreate: FC = () => {
                         <>
                           {form.getFieldValue('type') === 'Online' && (
                             <Form.Item
-                              name="meeting-url"
+                              name="meetingUrl"
                               label="Meeting URL"
                               rules={[
                                 {
@@ -187,6 +211,7 @@ const EventCreate: FC = () => {
               className={`w-600 full-width mt-20`}
               type="primary"
               htmlType="submit"
+              loading={isLoading}
             >
               Create
             </Button>
