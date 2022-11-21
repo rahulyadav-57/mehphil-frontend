@@ -89,7 +89,9 @@ const EventDetails: FC = () => {
                   src={
                     !eventData.thumbnail
                       ? '/images/layout/event-default.jpg'
-                      : `${AppConfig.API_URL}/${eventData.thumbnail.path}`
+                      : `${AppConfig.API_URL}/${
+                          (eventData.thumbnail as any).path
+                        }`
                   }
                   width={1200}
                   height={400}
@@ -100,9 +102,9 @@ const EventDetails: FC = () => {
                   <h1 className={`heading h5`}>{eventData.title}</h1>
                   <span className="color-light mt-10 d-block">
                     Organized by:{' '}
-                    {formatAddress(eventData.createdBy.walletAddress)}{' '}
+                    {formatAddress(eventData.createdBy!!.walletAddress)}{' '}
                     <CopyToClipboard
-                      value={eventData.createdBy.walletAddress}
+                      value={eventData.createdBy!!.walletAddress}
                     />
                   </span>
                 </div>
