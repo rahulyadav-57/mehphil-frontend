@@ -164,7 +164,7 @@ const Checkout: FC = () => {
                     .map((_item, i) => (
                       <Form.Item
                         key={`member-${i}`}
-                        name={['members', 0]}
+                        name={['members', i]}
                         label={`Member ${i + 1}`}
                         className="m-0"
                         rules={[
