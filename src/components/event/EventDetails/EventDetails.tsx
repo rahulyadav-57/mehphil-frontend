@@ -1,7 +1,8 @@
-import { CopyToClipboard } from '@/components/ui';
+import { CopyToClipboard, Skeleton } from '@/components/ui';
 import { AppIcon } from '@/components/ui/icon';
 import { AppConfig } from '@/config';
 import { useEventActions } from '@/hooks';
+import { bookingState } from '@/stores';
 import { formatAddress } from '@/utils/Misc';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Form, Input, notification } from 'antd';
@@ -9,6 +10,7 @@ import moment from 'moment';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import { MeetupEvent } from 'types';
 import s from './EventDetails.module.scss';
 
@@ -17,17 +19,26 @@ const EventDetails: FC = () => {
   const eventActions = useEventActions();
   const [eventData, setEventData] = useState<MeetupEvent | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [, setBookingState] = useRecoilState(bookingState);
 
   const router = useRouter();
   const { id: eventId } = router.query;
 
   const onFinish = (formValues: { ticketCount: number }) => {
-    console.log(formValues, 'formValues');
+    setBookingState({
+      ticketCount: formValues.ticketCount,
+      eventId: eventId?.toString()!!,
+      eventAt: eventData?.eventAt!!,
+      address: eventData?.address,
+      title: eventData?.title,
+    });
+    router.push('/checkout');
   };
 
   const updateTicketCount = (updateBy = 1) => {
     const currentValue = +form.getFieldValue('ticketCount');
     const finalValue = currentValue + updateBy;
+
     if (finalValue > 5) {
       notification.error({
         message: 'Maximum 5 tickets is allowed',
@@ -80,6 +91,7 @@ const EventDetails: FC = () => {
 
   return (
     <>
+      <Skeleton type="lines" isLoading={isLoading} />
       {eventData && (
         <div className={s.container}>
           <div className={`${s.column} ${s.columnLeft}`}>

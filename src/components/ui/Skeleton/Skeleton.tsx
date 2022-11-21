@@ -6,12 +6,18 @@ interface Props {
   isLoading: boolean;
   cardsPerRow?: 3 | 4 | 5;
   className?: string;
+  type?: 'lines' | 'grid';
 }
 
-const Skeleton: FC<Props> = ({ isLoading, cardsPerRow = 5, className }) => {
+const Skeleton: FC<Props> = ({
+  isLoading,
+  cardsPerRow = 5,
+  className,
+  type = 'grid',
+}) => {
   return (
     <>
-      {isLoading && (
+      {isLoading && type === 'grid' && (
         <div className={`${s.listingItems} ${className}`}>
           {Array(cardsPerRow * 2)
             .fill(null)
@@ -25,6 +31,7 @@ const Skeleton: FC<Props> = ({ isLoading, cardsPerRow = 5, className }) => {
             ))}
         </div>
       )}
+      {isLoading && type === 'lines' && <AntSkeleton active />}
     </>
   );
 };
