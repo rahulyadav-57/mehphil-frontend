@@ -5,6 +5,7 @@ import { authState } from '@/stores';
 import { Button, DatePicker, Form, Input, notification, Radio } from 'antd';
 import moment from 'moment';
 import Image from 'next/image';
+import Router from 'next/router';
 import { FC, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import EventCard from '../EventCard';
@@ -43,8 +44,9 @@ const EventCreate: FC = () => {
           ? formValues.thumbnail[0].fileData._id
           : '',
       };
-      await eventActions.create(formData);
+      const response = (await eventActions.create(formData)).data.data;
       notification.success({ message: 'Event created' });
+      Router.push(`/event/${response._id}`);
     } catch (error: any) {
       if (
         error?.response?.status === 422 &&
