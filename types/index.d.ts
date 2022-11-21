@@ -1,14 +1,14 @@
 declare global {}
 
 interface Media {
-  fileName: string;
-  orignalFileName: string;
-  mime: string;
+  fileName?: string;
+  orignalFileName?: string;
+  mime?: string;
   path: string;
-  size: string;
-  caption: string;
-  description: string;
-  uploadedBy: string;
+  size?: string;
+  caption?: string;
+  description?: string;
+  uploadedBy?: string;
 }
 
 export interface User {
@@ -25,16 +25,16 @@ export interface User {
 }
 
 export interface MeetupEvent {
-  _id: ObjectId;
+  _id?: ObjectId;
   title?: string;
-  type: "In-Person" | "Online";
+  type?: "In-Person" | "Online";
   address?: string;
   latLong?: LatLong;
   meetingUrl?: string;
   eventAt: Date;
   description?: string;
-  thumbnail: Media;
-  createdBy: User;
+  thumbnail: Media | string;
+  createdBy?: User;
 }
 
 export type AppSocialLogin = "google" | "twitter" | "github";

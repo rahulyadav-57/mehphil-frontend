@@ -224,24 +224,11 @@ textarea.ant-input {
       }
     }
     &:active {
-      //   background: #0085ff !important;
-      background: linear-gradient(
-        180deg,
-        #0085ff -4.5%,
-        #0085ff 18.08%,
-        #0085ff 53.94%,
-        #0085ff 100.1%
-      );
+      background-color: var(--primary-dark);
     }
     &.ant-btn-loading {
-      background: linear-gradient(
-        180deg,
-        #29c8fa -4.5%,
-        #29c8fa 18.08%,
-        #29c8fa 53.94%,
-        #29c8fa 100.1%
-      );
-      opacity: 1;
+      background-color: var(--primary-dark);
+      opacity: 0.7;
       &::before {
         display: none;
       }

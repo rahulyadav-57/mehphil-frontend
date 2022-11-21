@@ -1,10 +1,12 @@
 import UploadFile from '@/components/ui/form/UploadFile';
 import { AppConfig } from '@/config';
 import { useEventActions } from '@/hooks';
+import { authState } from '@/stores';
 import { Button, DatePicker, Form, Input, notification, Radio } from 'antd';
 import moment from 'moment';
 import Image from 'next/image';
 import { FC, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import EventCard from '../EventCard';
 import s from './EventCreate.module.scss';
 
@@ -13,10 +15,17 @@ const EventCreate: FC = () => {
   const eventActions = useEventActions();
   const [isLoading, setIsLoading] = useState(false);
   const [thumbnailURL, setThumnailURL] = useState('');
+  const auth = useRecoilValue(authState);
 
   const onFinish = async (formValues: any) => {
+    if (!auth?.accessToken) {
+      notification.error({
+        message: 'Sign in required',
+        key: 'sign-in-required',
+      });
+      return;
+    }
     setIsLoading(true);
-    console.log(formValues);
 
     try {
       const formData = {
@@ -30,7 +39,9 @@ const EventCreate: FC = () => {
           long: formValues.long,
         },
         meetingUrl: formValues.meetingUrl,
-        thumbnail: formValues.thumbnail ? formValues.thumbnail[0].fileData._id : '',
+        thumbnail: formValues.thumbnail
+          ? formValues.thumbnail[0].fileData._id
+          : '',
       };
       await eventActions.create(formData);
       notification.success({ message: 'Event created' });
@@ -79,7 +90,7 @@ const EventCreate: FC = () => {
                   >
                     {thumbnailURL && (
                       <Image
-                        src={thumbnailURL}
+                        src={`${AppConfig.API_URL}/${thumbnailURL}`}
                         width={500}
                         height={240}
                         alt=""
@@ -102,9 +113,7 @@ const EventCreate: FC = () => {
                         label="Upload logo"
                         onChange={(value) => {
                           if (value && value.length > 0) {
-                            setThumnailURL(
-                              `${AppConfig.API_URL}/${value[0].fileData.path}`
-                            );
+                            setThumnailURL(`${value[0].fileData.path}`);
                             return;
                           }
                           setThumnailURL('');
@@ -249,9 +258,9 @@ const EventCreate: FC = () => {
                       data={{
                         title: form.getFieldValue('name'),
                         eventAt: form.getFieldValue('date'),
+                        thumbnail: thumbnailURL ? { path: thumbnailURL } : '',
                       }}
                     />
-                    {/* <span>{form.getFieldValue('name')}</span> */}
                   </>
                 );
               }}
