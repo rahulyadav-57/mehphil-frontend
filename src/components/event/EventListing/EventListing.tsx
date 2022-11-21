@@ -1,12 +1,13 @@
 import { Skeleton } from '@/components/ui';
 import { useEventActions } from '@/hooks';
 import { FC, useEffect, useState } from 'react';
+import { MeetupEvent } from 'types';
 import EventCard from '../EventCard';
 import s from './EventListing.module.scss';
 
 const EventListing: FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [events, setEvents] = useState<any>([]);
+  const [events, setEvents] = useState<MeetupEvent[]>([]);
 
   const eventActions = useEventActions();
 
