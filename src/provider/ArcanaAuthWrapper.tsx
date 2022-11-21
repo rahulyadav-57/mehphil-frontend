@@ -54,19 +54,18 @@ const ArcanaAuthWrapper: FC<Props> = ({ children }) => {
         await signMessage();
       } catch (error: any) {
         if (
-          error
-            .toString()
-            .contains(
-              'The requested fn sendRequest is not available in this context'
-            )
+          error.message.includes(
+            'The requested fn sendRequest is not available in this context'
+          )
         ) {
           notification.error({
             message:
               'Current login flow is supported in chromium based browser only',
           });
+          return;
         }
 
-        console.log('abc', error, typeof error);
+        console.log('abc', error.message, typeof error);
       }
     })();
 
