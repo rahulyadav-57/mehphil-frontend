@@ -33,7 +33,7 @@ const ArcanaAuthWrapper: FC<Props> = ({ children }) => {
     }
     setAuth({
       address: user.address,
-      name: (user.name as string) || "User",
+      name: (user.name as string) || 'User',
       email: user.email!!,
       avatar: user?.picture,
       accessToken,
@@ -53,6 +53,10 @@ const ArcanaAuthWrapper: FC<Props> = ({ children }) => {
         await timeout(300);
         await signMessage();
       } catch (error) {
+        notification.error({
+          message:
+            'Current login flow is supported in chromium based browser only',
+        });
         console.log('abc', error);
       }
     })();
