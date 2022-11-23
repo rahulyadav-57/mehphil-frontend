@@ -1,107 +1,110 @@
 import { AppConfig } from "@/config";
-import { timeout } from "@/utils/Misc";
-import { AuthProvider } from "@arcana/auth";
-import { AppSocialLogin } from "types";
+import { CHAIN_NAMESPACES, SafeEventEmitterProvider } from "@web3auth/base";
+import { Web3AuthCore } from "@web3auth/core";
+import { TorusWalletAdapter } from "@web3auth/torus-evm-adapter";
+import { ethers } from "ethers";
 
 function createAuthService() {
-  let authInstance: AuthProvider = {} as AuthProvider;
+  let authInstance: Web3AuthCore | null = null;
+  let provider: SafeEventEmitterProvider | null = null;
 
-  async function getAuth() {
+  function getAuth() {
+    if (!authInstance) {
+      console.log("Auth not initialized");
+      return;
+    }
     return authInstance;
   }
 
   async function init() {
-    const _authInstance = new AuthProvider(AppConfig.arcana.appAddress, {
-      debug: false,
-      alwaysVisible: true,
-      theme: "dark",
+    if (authInstance) {
+      provider = authInstance.provider;
+
+      return authInstance;
+    }
+
+    const web3auth = new Web3AuthCore({
+      clientId: AppConfig.web3Auth.clientId,
+      chainConfig: {
+        displayName: "Aurora",
+        chainNamespace: CHAIN_NAMESPACES.EIP155,
+        chainId: "0x4E454153",
+        rpcTarget: "https://testnet.aurora.dev",
+        blockExplorer: "https://testnet.aurorascan.dev/",
+        ticker: "ETH",
+        tickerName: "Ethereum",
+      },
     });
-    authInstance = _authInstance;
-    return authInstance.init();
+
+    const torusWalletAdapter = new TorusWalletAdapter({
+      initParams: {
+        whiteLabel: {
+          theme: {
+            isDark: true,
+            colors: { torusBrand1: "#000" },
+          },
+          logoDark: "https://mehphil.vercel.app/images/logo.png",
+          logoLight: "https://mehphil.vercel.app/images/logo.png",
+          topupHide: true,
+          featuredBillboardHide: true,
+          disclaimerHide: true,
+          defaultLanguage: "en",
+        },
+      },
+    });
+    web3auth.configureAdapter(torusWalletAdapter);
+    web3auth.init();
+    provider = web3auth.provider;
+    authInstance = web3auth;
+
+    authInstance;
   }
 
-  async function isLoggedIn() {
-    return authInstance.isLoggedIn();
+  async function getUser() {
+    if (!authInstance) {
+      console.log("Auth not initialized");
+      return;
+    }
+    return authInstance?.getUserInfo();
   }
+
+  const getAccounts = async () => {
+    if (!authInstance) {
+      return [];
+    }
+    const web3 = new ethers.providers.Web3Provider(authInstance.provider!!);
+    return web3.listAccounts();
+  };
 
   async function logout() {
+    if (!authInstance) {
+      console.log("Auth not initialized");
+      return;
+    }
     return authInstance.logout();
   }
 
-  async function requestPublicKey(email: string) {
-    return authInstance.getPublicKey(email);
-  }
-
-  async function loginWithSocial(type: AppSocialLogin) {
-    if (!(await isLoggedIn())) {
-      await authInstance.loginWithSocial(type);
-    }
-  }
-
-  async function loginWithLink(email: string) {
-    if (!(await isLoggedIn())) {
-      await authInstance.loginWithLink(email);
-    }
-  }
-
-  async function fetchUserDetails() {
-    return authInstance.getUser();
-  }
-
-  async function requestWalletInfo() {
-    const provider = authInstance.provider;
-    return provider.request({ method: "eth_accounts" });
-  }
-
-  async function changeChain() {
-    await authInstance.provider.request({
-      method: "wallet_addEthereumChain",
-      params: [
-        {
-          chainId: "0x4E454153",
-          chainName: "Aurora Testnet",
-          blockExplorerUrls: ["https://testnet.aurorascan.dev/"],
-          rpcUrls: ["https://testnet.aurora.dev"],
-          nativeCurrency: {
-            symbol: "ETH",
-          },
-        },
-      ],
-    });
-    await timeout(500);
-
-    await authInstance.provider.request({
-      method: "wallet_switchEthereumChain",
-      params: [
-        {
-          chainId: "0x4E454153",
-        },
-      ],
-    });
-  }
-
   async function personalSign(message: any, address: string) {
-    return authInstance.provider.request({
-      method: "eth_sign",
-      params: [address, message],
+    if (!authInstance || !authInstance.provider) {
+      console.log("Auth not initialized");
+      return;
+    }
+
+    return authInstance?.provider.request({
+      method: "personal_sign",
+      params: [message, address],
     });
   }
 
   return {
     init,
-    isLoggedIn,
     logout,
-    requestPublicKey,
-    loginWithSocial,
-    loginWithLink,
-    fetchUserDetails,
-    requestWalletInfo,
     getAuth,
-    changeChain,
+    getUser,
     personalSign,
+    getAccounts,
   };
 }
-
 const AuthService = Object.freeze(createAuthService());
 
 export default AuthService;
