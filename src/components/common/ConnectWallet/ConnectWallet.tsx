@@ -28,9 +28,9 @@ const ConnectWallet: FC<Props> = ({ className = '' }) => {
   const userActions = useUserActions();
 
   async function signMessage(_address: string) {
-    // if (isSigning) {
-    //   return;
-    // }
+    if (isSigning) {
+      return;
+    }
     isSigning = true;
     const nonce = await (await userActions.nonce()).data;
     const user = await AuthService.getUser();
