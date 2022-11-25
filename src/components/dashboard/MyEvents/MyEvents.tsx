@@ -45,7 +45,7 @@ const MyEvents: FC = () => {
                   href={`/dashboard/booking/${item._id}`}
                   className={`${s.bookings} w-600 ant-btn ant-btn-primary`}
                 >
-                  <EyeOutlined className="mr-5" /> View Bookings
+                  <EyeOutlined className="mr-5" /> Statistics
                 </Link>
               </EventCard>
             ))}
