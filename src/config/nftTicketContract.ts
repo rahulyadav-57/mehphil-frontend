@@ -1,5 +1,5 @@
 export const nftTicketContract = {
-  address: "0x70586616674b548720874d4aeed9c13bc0e2105a",
+  address: "0x233c481c78bb413e2bb63374c639e41e08b53c96",
   abi: [
     {
       inputs: [
