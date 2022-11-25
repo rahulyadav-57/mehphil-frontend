@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 
 interface AuthState {
-  id?: string;
+  _id?: string;
   email: string;
   accessToken?: string;
   name: string;

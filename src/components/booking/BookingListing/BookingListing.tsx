@@ -26,7 +26,7 @@ const BookingListing: FC<Props> = ({ isUserBooking = false }) => {
       setIsLoading(true);
       const filter: any = {};
       if (isUserBooking) {
-        filter['createdBy'] = auth?.id;
+        filter['createdBy'] = auth?._id;
       } else {
         filter['eventId'] = eventId?.toString()!!;
       }

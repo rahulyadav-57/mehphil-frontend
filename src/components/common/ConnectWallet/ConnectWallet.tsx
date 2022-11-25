@@ -40,18 +40,18 @@ const ConnectWallet: FC<Props> = ({ className = '' }) => {
       _address
     )) as string;
     try {
-      const accessToken = await (
+      const { token: accessToken, _id } = await (
         await userActions.login({
           message,
           signature,
           address: _address,
         })
-      ).data.data.token;
+      ).data.data;
       if (!user) {
         return;
       }
       setAuth({
-        id: user._id,
+        _id: _id,
         address: _address,
         name: (user.name as string) || 'User',
         email: user.email!!,

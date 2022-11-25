@@ -19,7 +19,7 @@ const MyEvents: FC = () => {
   const getEvents = async () => {
     setIsLoading(true);
     try {
-      const eventList = (await eventActions.list({ createdBy: auth?.id })).data
+      const eventList = (await eventActions.list({ createdBy: auth?._id })).data
         .data;
       console.log(eventList, 'eventList');
       setEvents(eventList);
