@@ -17,7 +17,7 @@ const DashbaordLayout: FC<Props> = ({ children, className }) => {
             <Link className={s.menuItem} href="/dashboard/events">
               Created Events
             </Link>
-            <Link className={s.menuItem} href="/dashboard/events">
+            <Link className={s.menuItem} href="/dashboard/booking">
               My Bookings
             </Link>
           </div>

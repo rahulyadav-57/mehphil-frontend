@@ -347,3 +347,7 @@ textarea.ant-input {
     }
   }
 }
+
+.ant-table-thead > tr > th {
+  background: var(--primary);
+}

@@ -36,4 +36,13 @@ export interface MeetupEvent {
   createdBy?: User;
 }
 
+export interface Bookings {
+  _id?: ObjectId;
+  name: string;
+  email: string;
+  ticketCount: string;
+  nftOpted: boolean;
+  members: string[];
+}
+
 export type AppSocialLogin = "google" | "twitter" | "github";

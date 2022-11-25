@@ -10,6 +10,7 @@ function useEventActions() {
     create,
     list,
     show,
+    bookings,
     bookTicket,
   };
 
@@ -24,6 +25,9 @@ function useEventActions() {
   }
   async function list(data: any = {}): Promise<AxiosResponse> {
     return ApiClient.get("/meetup", data);
+  }
+  async function bookings(data: any): Promise<AxiosResponse> {
+    return ApiClient.get(`/meetup//bookings`, data);
   }
   async function show(id: string): Promise<AxiosResponse> {
     return ApiClient.get(`/meetup/${id}`);
