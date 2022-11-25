@@ -1,0 +1,17 @@
+.container {
+  .heading {
+  }
+  .list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px 30px;
+    margin-top: 1.5rem;
+  }
+  .bookings {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.3rem 0.5rem !important;
+    height: unset;
+  }
+}

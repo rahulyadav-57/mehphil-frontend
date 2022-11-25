@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  .sidebar {
+    width: 15rem;
+    background-color: var(--bg-color-light);
+    min-height: 100vh;
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    margin-right: 1rem;
+    .menuItem {
+      color: #fff;
+      padding: 0.8rem 0;
+      display: flex;
+      font-size: 1.2rem;
+    }
+  }
+}

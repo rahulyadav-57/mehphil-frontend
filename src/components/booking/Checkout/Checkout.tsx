@@ -1,8 +1,11 @@
 import { Button, Checkbox, Form, Input, notification } from 'antd';
 import PhoneInput from 'react-phone-input-2';
 
+import { AppConfig } from '@/config';
 import { useEventActions } from '@/hooks';
+import { AuthService } from '@/services';
 import { authState, bookingState } from '@/stores';
+import { ethers } from 'ethers';
 import moment from 'moment';
 import Router from 'next/router';
 import { FC, useEffect, useState } from 'react';
@@ -20,7 +23,18 @@ const Checkout: FC = () => {
   const [eventData, setEventData] = useState<MeetupEvent | null>(null);
 
   const onFinish = async (formValues: any) => {
-    console.log(formValues, 'formValues');
+    if (!auth?.accessToken) {
+      notification.error({
+        message: 'Sign in required',
+        key: 'sign-in-required',
+      });
+      return;
+    }
+    const nftId = null;
+
+    if (formValues.nftOpted) {
+      await mintNFT();
+    }
 
     const formData = {
       ...formValues,
@@ -50,6 +64,28 @@ const Checkout: FC = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const mintNFT = async () => {
+    const provider = AuthService.getAuth()?.provider;
+    if (!provider) {
+      notification.error({ message: 'Sign in required' });
+      return;
+    }
+    const web3 = new ethers.providers.Web3Provider(provider);
+
+    const signer = web3.getSigner();
+    const contract = new ethers.Contract(
+      AppConfig.nftTicketContract.address,
+      AppConfig.nftTicketContract.abi,
+      signer
+    );
+
+    const numberOfTicketToMint =
+      1 + (booking && booking?.ticketCount ? booking?.ticketCount : 0);
+    const tx = await contract.mintNFTs(numberOfTicketToMint);
+    const receipt = await tx.wait();
+    console.log('receipt', receipt);
   };
 
   useEffect(() => {
@@ -97,7 +133,7 @@ const Checkout: FC = () => {
                     },
                   ]}
                 >
-                  <Input placeholder="abc@gmail.com" />
+                  <Input type="email" placeholder="abc@gmail.com" />
                 </Form.Item>
 
                 <Form.Item name="phone" label="Phone">
@@ -230,15 +266,22 @@ const Checkout: FC = () => {
                   <span>Rs. 2,100</span>
                 </div>
               </div> */}
-
-              <Button
-                className={`w-600 full-width mt-50 ${s.bookNow}`}
-                type="primary"
-                htmlType="submit"
-                loading={isLoading}
-              >
-                Confirm
-              </Button>
+              <Form.Item shouldUpdate noStyle>
+                {() => {
+                  return (
+                    <Button
+                      className={`w-600 full-width mt-50 ${s.bookNow}`}
+                      type="primary"
+                      htmlType="submit"
+                      loading={isLoading}
+                    >
+                      {form.getFieldValue('nftOpted')
+                        ? 'Mint and confirm'
+                        : 'Confirm'}
+                    </Button>
+                  );
+                }}
+              </Form.Item>
             </div>
           </div>
         </div>

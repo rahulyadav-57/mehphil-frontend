@@ -51,6 +51,7 @@ const ConnectWallet: FC<Props> = ({ className = '' }) => {
         return;
       }
       setAuth({
+        id: user._id,
         address: _address,
         name: (user.name as string) || 'User',
         email: user.email!!,

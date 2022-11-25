@@ -22,8 +22,8 @@ function useEventActions() {
   ): Promise<AxiosResponse> {
     return ApiClient.post(`/meetup/${eventId}/book`, data);
   }
-  async function list(): Promise<AxiosResponse> {
-    return ApiClient.get("/meetup");
+  async function list(data: any = {}): Promise<AxiosResponse> {
+    return ApiClient.get("/meetup", data);
   }
   async function show(id: string): Promise<AxiosResponse> {
     return ApiClient.get(`/meetup/${id}`);

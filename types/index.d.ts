@@ -16,7 +16,6 @@ export interface User {
   walletAddress: string;
   email?: string;
   name?: string;
-  userName?: string;
   nonce: string;
   avatar?: string;
   role: string;
